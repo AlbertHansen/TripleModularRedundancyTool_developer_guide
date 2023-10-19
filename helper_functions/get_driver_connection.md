@@ -1,4 +1,4 @@
-[get_driver_connection_figure]: ..\figures\helper_functions\get_driver_connection.drawio.svg
+[get_driver_connection_figure]: ../figures/helper_functions/get_driver_connection.drawio.svg
 
 # ```get_driver_connection```
 

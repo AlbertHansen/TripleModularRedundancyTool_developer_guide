@@ -1,4 +1,4 @@
-[hierarchy_figure]: ..\figures\helper_functions\get_hierarchy.drawio.svg
+[hierarchy_figure]: ../figures/helper_functions/get_hierarchy.drawio.svg
 
 # ```get_top_design```
 

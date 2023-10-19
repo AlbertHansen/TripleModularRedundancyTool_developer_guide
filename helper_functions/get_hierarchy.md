@@ -1,4 +1,4 @@
-[get_hierarchy_figure]: ..\figures\helper_functions\get_hierarchy.drawio.svg
+[get_hierarchy_figure]: ../figures/helper_functions/get_hierarchy.drawio.svg
 
 # ```get_hierarchy```
 

@@ -1,4 +1,4 @@
-[remove_ports_top_figure]: ..\figures\rewire_scripts\remove_ports_top.drawio.svg
+[remove_ports_top_figure]: ../figures/rewire_scripts/remove_ports_top.drawio.svg
 
 # ```remove_ports_top```
 

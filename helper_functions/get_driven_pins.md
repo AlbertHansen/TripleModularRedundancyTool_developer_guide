@@ -1,4 +1,4 @@
-[get_driven_pins_figure]: ..\figures\helper_functions\get_driven_pins.drawio.svg
+[get_driven_pins_figure]: ../figures/helper_functions/get_driven_pins.drawio.svg
 
 # ```get_driven_pins```
 

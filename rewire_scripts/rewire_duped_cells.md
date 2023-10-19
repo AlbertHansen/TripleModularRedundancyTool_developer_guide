@@ -1,4 +1,4 @@
-[rewire_duped_cells_figure]: ..\figures\rewire_scripts\rewire_duped_cells.drawio.svg
+[rewire_duped_cells_figure]: ../figures/rewire_scripts/rewire_duped_cells.drawio.svg
 
 # ```rewire_duped_cells```
 

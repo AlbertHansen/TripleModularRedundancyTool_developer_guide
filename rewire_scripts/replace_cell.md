@@ -1,4 +1,4 @@
-[replace_cell_figure]: ..\figures\rewire_scripts\replace_cell.drawio.svg
+[replace_cell_figure]: ../figures/rewire_scripts/replace_cell.drawio.svg
 
 # ```replace_cell```
 

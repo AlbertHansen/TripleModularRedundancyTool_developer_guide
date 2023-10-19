@@ -1,4 +1,4 @@
-[create_voter_figure]: ..\figures\rewire_scripts\create_voter.drawio.svg
+[create_voter_figure]: ../figures/rewire_scripts/create_voter.drawio.svg
 
 # ```create_voter```
 

@@ -1,4 +1,4 @@
-[join_in_busses_figure]: ..\figures\rewire_scripts\join_ports_in_busses.drawio.svg
+[join_in_busses_figure]: ../figures/rewire_scripts/join_ports_in_busses.drawio.svg
 
 # ```join_ports_in_busses```
 

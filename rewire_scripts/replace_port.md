@@ -1,4 +1,4 @@
-[replace_port_figure]: ..\figures\rewire_scripts\replace_port.drawio.svg
+[replace_port_figure]: ../figures/rewire_scripts/replace_port.drawio.svg
 
 # ```replace_port```
 

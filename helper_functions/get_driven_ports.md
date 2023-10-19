@@ -1,4 +1,4 @@
-[get_driven_ports_figure]: ..\figures\helper_functions\get_driven_ports.drawio.svg
+[get_driven_ports_figure]: ../figures/helper_functions/get_driven_ports.drawio.svg
 
 # ```get_driven_ports```
 

@@ -1,4 +1,4 @@
-[is_cell_figure]: ..\figures\helper_functions\is_cell.drawio.svg
+[is_cell_figure]: ../figures/helper_functions/is_cell.drawio.svg
 
 # ```ìs_port```
 
