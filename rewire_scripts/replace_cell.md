@@ -66,6 +66,11 @@ proc replace_cell { original replacement {force_replace "false"}} {
 }
 ```
 
+This function will only work, if the following functions are sourced:
+
+* ```get_synopsys_value```
+* ```connect```
+
 ## Example
 
 In the figure below, ```U1``` is replaced with one of its replicants from triplication of the cell. The function is called:

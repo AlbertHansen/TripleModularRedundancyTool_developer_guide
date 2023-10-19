@@ -39,6 +39,10 @@ proc is_port { element } {
 }
 ```
 
+This function will only work, if the following function is sourced:
+
+* ```get_synopsys_value```
+
 ## Example
 
 Given a circuit:

@@ -40,6 +40,10 @@ proc replace_port { original replacement } {
 }
 ```
 
+This function will only work, if the following function is sourced:
+
+* ```get_synopsys_value```
+
 ## Example
 
 The figure below is a design with 1 input and 1 output port originally, however they have both been triplicated, leaving the original ports disconnected. The disconnected ports are removed by calling the script.

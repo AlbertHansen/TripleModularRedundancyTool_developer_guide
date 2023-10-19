@@ -91,6 +91,16 @@ proc rewire_duped_cells {} {
 }
 ```
 
+This function will only work, if the following functions are sourced:
+
+* ```get_synopsys_value```
+* ```get_replicants```
+* ```get_driven_pins```
+* ```get_driven_ports```
+* ```connect```
+* ```create_voter```
+* ```lremove```
+
 ## Example
 
 The figure below is the before and after of the script. The cells outlined in red represents the targeted cells of the script. During the script the replicants are found and redistributed or voted. The redistributed nets, the rewired nets, and the inserted voters are all marked with a blue outline in the "after" part of the figure.

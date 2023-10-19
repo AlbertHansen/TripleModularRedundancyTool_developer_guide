@@ -40,6 +40,10 @@ proc replace_port { original replacement } {
 }
 ```
 
+This function will only work, if the following function is sourced:
+
+* ```get_synopsys_value```
+
 ## Example
 
 Calling the function:

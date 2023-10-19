@@ -101,6 +101,10 @@ proc connect {driver_pin driven_pins} {
 }
 ```
 
+This function will only work, if the following function is sourced:
+
+* ```get_synopsys_value```
+
 ## Example
 
 The figure below depicts before (marked in blue) and after (marked in red) of the following function call:

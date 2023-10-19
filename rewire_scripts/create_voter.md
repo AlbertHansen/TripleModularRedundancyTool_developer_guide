@@ -268,6 +268,12 @@ proc create_voter { inputs outputs } {
 }
 ```
 
+This function will only work, if the following functions are sourced:
+
+* ```get_synopsys_value```
+* ```is_port```
+* ```connect```
+
 ## Example
 
 In the figure below, the outcome of a 3-to-1 vote can be seen. The corresponding function-call would look somewhat like:

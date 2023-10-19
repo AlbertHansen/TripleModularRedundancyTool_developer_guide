@@ -90,6 +90,14 @@ proc vote_nets {} {
 }
 ```
 
+This function will only work, if the following functions are sourced:
+
+* ```get_synopsys_value```
+* ```lremove```
+* ```get_replicants```
+* ```get_driver_connection```
+* ```connect```
+
 ## Example
 
 The figure below is an example of the before and after of running this script. Three voters (marked with blue) are inserted on a net suffixed with "_Voted" (marked in red).
