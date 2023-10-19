@@ -25,8 +25,7 @@ proc get_top_design {} {
     #######################################################################
 
     # create a list of  all designs 
-    redirect -variable designs {list_designs}
-    set designs [join $designs]
+    set designs [get_synopsys_value "list_designs"]
     set designs [lrange $designs 0 end-1]                           ;# removes returned bool from list_design call
     set designs [lsearch -all -inline -exact -not $designs {(*)}]   ;# removes indicator of current design
 
@@ -38,11 +37,8 @@ proc get_top_design {} {
         current_design $design
 
         # retrieve subdesigns
-        redirect -variable subdesigns {all_designs}
-        redirect -variable subdesigns {all_designs}
-        puts $subdesigns
+        set subdesigns [get_synopsys_value "all_designs"]
         set subdesigns [lsearch -all -inline -not [join $subdesigns] $design]
-        puts $subdesigns
 
         # remove subdesigns from list
         foreach subdesign $subdesigns {
@@ -58,6 +54,10 @@ proc get_top_design {} {
     return $top_design
 }
 ```
+
+This function will only work, if the following function is sourced:
+
+* ```get_synopsys_value```
 
 ## Example
 
