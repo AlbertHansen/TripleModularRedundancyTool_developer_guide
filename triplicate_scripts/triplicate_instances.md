@@ -1,5 +1,3 @@
-[triplicate_instances_figure]: ../figures/triplicate_scripts/triplicate_instances.drawio.svg
-
 # ```triplicate_instances```
 
 This is a *triplicate* script!
@@ -130,6 +128,9 @@ This function will only work, if the following functions are sourced:
 
 The before and after of the script being called. The red outlines mark the targeted elements of the design, the orange text marks that the ```tmrg``` attribute is set to true and have been/should be triplicated. The blue outline or text indicates where the script has affected the design.
 
-![Example triplication of a module instance][triplicate_instances_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/triplicate_scripts/triplicate_instances.drawio.svg">
+  <img alt="Example triplication of a module instance" src="../figures/light-mode/triplicate_scripts/triplicate_instances.drawio.svg">
+</picture>
 
 Important to note is the removal of ```inst0/IN``` and ```inst0/OUT```. ```inst0/IN_B``` and ```inst0/IN_C``` have not been connected to the same source as ```inst0/IN_A``` as other functions/scripts might do, but this will be handled during the ```rewire_input_ports``` (and in other cases ```rewire_duped_cells```)

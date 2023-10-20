@@ -1,5 +1,3 @@
-[triplicate_cell_figure]: ../figures/triplicate_scripts/triplicate_cell.drawio.svg
-
 # ```triplicate_cells```
 
 This is a *triplicate* script!
@@ -53,4 +51,7 @@ This function will only work, if the following functions are sourced:
 
 The names marked in orange indicate that their ```tmrg``` attribute has been set to true. The red outline marks the target, and the blue outline marks the changes that has happened.
 
-![Example of a triplicate_cell called on a cell][triplicate_cell_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/triplicate_scripts/triplicate_cell.drawio.svg">
+  <img alt="Example of a triplicate_cells called on a cell" src="../figures/light-mode/triplicate_scripts/triplicate_cell.drawio.svg">
+</picture>

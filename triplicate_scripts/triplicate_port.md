@@ -1,5 +1,3 @@
-[triplicate_port_figure]: ../figures/triplicate_scripts/triplicate_output_ports.drawio.svg
-
 # ```triplicate_port```
 
 This is a *triplicate* function!
@@ -78,4 +76,7 @@ The figure below is an example of the following call:
 >> triplicate_port OUT
 ```
 
-![triplicate_port_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/triplicate_scripts/triplicate_output_ports.drawio.svg">
+  <img alt="Example of triplicate_port on an output port" src="../figures/light-mode/triplicate_scripts/triplicate_output_ports.drawio.svg">
+</picture>

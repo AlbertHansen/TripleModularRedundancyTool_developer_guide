@@ -1,5 +1,3 @@
-[triplicate_input_ports]: ../figures/triplicate_scripts/triplicate_input_ports.drawio.svg
-
 # ```triplicate_input_ports```
 
 This is a *triplicate* script
@@ -49,4 +47,7 @@ This function will only work, if the following functions are sourced:
 
 The names marked in orange indicate that their ```tmrg``` attribute has been set to true. The red outline marks the target, and the blue outline marks the changes that has happened.
 
-![Example of triplication step on input ports][triplicate_input_ports]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/triplicate_scripts/triplicate_input_ports.drawio.svg">
+  <img alt="Example of triplication step on input ports" src="../figures/light-mode/triplicate_scripts/triplicate_input_ports.drawio.svg">
+</picture>
