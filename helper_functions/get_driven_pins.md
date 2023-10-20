@@ -90,7 +90,6 @@ Given the circuit below, if you use ```get_driven_pins``` on the IN port (marked
   <img alt="get_driven_pins used on example circuit. Red textcolor indicates the input to the function call, and blue indicates the return." src="../figures/light-mode/helper_functions/get_driven_pins.drawio.svg">
 </picture>
 
-
 When calling the function, it would look somewhat like:
 
 ```tcl
