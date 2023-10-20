@@ -104,6 +104,8 @@ And a few small advices:
 
 ## Scripts and Functions
 
+The main script can be found in [```main_script```](main_script.md) with a flowchart and the definition of the code.
+
 The scripts and functions used in this tool have been separated in four categories; *update*, *triplicate*, *rewire*, and helper functions, where the first three correspond to the steps in the design philosophy presented above. Every function has been documented with focus on *purpose*, *usage*, *definition*, and an *example* with a figure if applicable.
 
 * [Helper functions](helper_functions/)
