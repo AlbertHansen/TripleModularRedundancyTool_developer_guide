@@ -1,5 +1,3 @@
-[update_tmrg_figure]: ../figures/update_scripts/update_tmrg.drawio.svg
-
 # ```update_tmrg```
 
 This is an *update* script!
@@ -280,6 +278,9 @@ proc update_tmrg { top_default } {
 
 Below is a figure of the before and after of this script being called on a simple design. The red outlines mark the targets for the functions, the blue outlines mark the affected elements, the orange text indicates ```tmrg``` attribute is set to true.
 
-![Example of updating the tmrg attribute for logic cells][update_tmrg_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/update_tmrg.drawio.svg">
+  <img alt="Example of updating the tmrg attribute for logic cells" src="../figures/light-mode/update_scripts/update_tmrg.drawio.svg">
+</picture>
 
 In this case one or more of the ports could be changed for a register or module instantiation with same value on the ```tmrg``` attribute and the result would be the same

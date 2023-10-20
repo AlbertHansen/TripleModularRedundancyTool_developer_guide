@@ -1,5 +1,3 @@
-[update_design_default_tmrg_figure]: ../figures/update_scripts/update_design_dault_tmrg.drawio.svg
-
 # ```update_design_default_tmrg```
 
 This is an *update* script!
@@ -101,6 +99,9 @@ This function will only work, if the following functions are sourced:
 
 The figure below depicts the propagation of the ```default_tmrg``` attribute through a hierarchy. Orange colour indicates that the ```default_tmrg``` attribute is set to true, whereas pink means false.
 
-![Example of the default_tmrg attribute propagating through a hierarchy][update_design_default_tmrg_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/update_design_default_tmrg.drawio.svg">
+  <img alt="Example of the default_tmrg attribute propagating through a hierarchy" src="../figures/light-mode/update_scripts/update_design_default_tmrg.drawio.svg">
+</picture>
 
 Notice that the attribute is already defined for DESIGN_2, and it will not be overridden, but rather the value will propagate to designs contained in DESIGN_2

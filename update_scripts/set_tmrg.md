@@ -1,5 +1,3 @@
-[set_tmrg_figure]: ../figures/update_scripts/set_tmrg.drawio.svg
-
 # ```set_tmrg```
 
 This is an *update* function!
@@ -52,4 +50,7 @@ In the figure below the red outline marks the target of the function, blue outli
 >> set_tmrg true U1
 ```
 
-![Example of setting the tmrg attribute][set_tmrg_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/set_tmrg.drawio.svg">
+  <img alt="Example of setting the tmrg attribute" src="../figures/light-mode/update_scripts/set_tmrg.drawio.svg">
+</picture>

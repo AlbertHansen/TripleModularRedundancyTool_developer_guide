@@ -1,5 +1,3 @@
-[update_port_tmrg_figure]: ../figures/update_scripts/update_port_tmrg.drawio.svg
-
 # ```update_port_tmrg```
 
 This is an *update* script!
@@ -55,4 +53,7 @@ This function will only work, if the following functions is sourced:
 
 Below is a figure of the before and after of this script being called on a simple design. The red outlines mark the targets for the functions, the blue outlines mark the affected elements, the orange text indicates the ```default_tmrg``` or ```tmrg``` attribute is set to true (based on if it's a design or a port), and pink indicates false.
 
-![Default_tmrg propagating to the ports of a design][update_port_tmrg_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/update_port_tmrg.drawio.svg">
+  <img alt="Default_tmrg propagating to the ports of a design" src="../figures/light-mode/update_scripts/update_port_tmrg.drawio.svg">
+</picture>

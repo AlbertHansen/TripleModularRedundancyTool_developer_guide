@@ -1,5 +1,3 @@
-[get_tmrg_figure]: ../figures/update_scripts/get_tmrg.drawio.svg
-
 # ```get_tmrg```
 
 This is an *update* function!
@@ -59,4 +57,7 @@ false
 
 The text marked in orange marks triplicated elements.
 
-![Setup for calling get_tmrg][get_tmrg_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/get_tmrg.drawio.svg">
+  <img alt="Setup for calling get_tmrg" src="../figures/light-mode/update_scripts/get_tmrg.drawio.svg">
+</picture>
