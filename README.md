@@ -32,21 +32,21 @@ To visualise the three steps the following figures were created, note that blue 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_0.drawio.svg">
-  <img alt="Base case" src="figures/dark-mode/3-steps_0.drawio.svg">
+  <img alt="Base case" src="figures/light-mode/3-steps_0.drawio.svg">
 </picture>
 
 The **update step** applies the ```tmrg``` attribute set to true on all reachable logic cells from port B. This is visualised below with the orange text.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_1.drawio.svg">
-  <img alt="Step 1: Update" src="figures/dark-mode/3-steps_1.drawio.svg">
+  <img alt="Step 1: Update" src="figures/light-mode/3-steps_1.drawio.svg">
 </picture>
 
 Every element with the ```tmrg``` attribute set to true a fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_2.drawio.svg">
-  <img alt="Base case" src="figures/dark-mode/3-steps_2.drawio.svg">
+  <img alt="Base case" src="figures/light-mode/3-steps_2.drawio.svg">
 </picture>
 
 The unconnected ports and output pins are handled in the **rewire step**. All the original elements, from which replicants have been generated, are inspected with a focus on their outputs. If the original cell is driving a triplicated element, the connections are redistributed to the replicants. B_A is driving three redundancy-generated AND-gates, and the connections are redistributed below. However, if the original cell is driving an element that is not triplicated, a voter should
@@ -55,7 +55,7 @@ redundancy-generated NOT-gates and in the figure below, they are voted.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_3.drawio.svg">
-  <img alt="Base case" src="figures/dark-mode/3-steps_3.drawio.svg">
+  <img alt="Base case" src="figures/light-mode/3-steps_3.drawio.svg">
 </picture>
 
 To see how the "_Voted"-suffix is handled and voted see **Example** in [```vote_nets```](rewire_scripts/vote_nets.md).
