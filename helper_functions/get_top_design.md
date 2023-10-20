@@ -1,5 +1,3 @@
-[hierarchy_figure]: ../figures/helper_functions/get_hierarchy.drawio.svg
-
 # ```get_top_design```
 
 This is a helper function!
@@ -63,7 +61,10 @@ This function will only work, if the following function is sourced:
 
 Given the hierarchy in the following figure:
 
-![Example hierachy.][hierarchy_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/helper_functions/get_hierarchy.drawio.svg">
+  <img alt="Example hierachy." src="../figures/light-mode/helper_functions/get_hierarchy.drawio.svg">
+</picture>
 
 Calling the function will return:
 

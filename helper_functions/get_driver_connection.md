@@ -1,5 +1,3 @@
-[get_driver_connection_figure]: ../figures/helper_functions/get_driver_connection.drawio.svg
-
 # ```get_driver_connection```
 
 This function is a helper function!
@@ -55,7 +53,10 @@ This function will only work, if the following function is sourced:
 
 Given the circuit below, if you use ```get_driver_connection``` on the OUT2 port (marked in red), the returned value would be port IN (marked in blue).
 
-![get_driven_pins used on example circuit. Red textcolor indicates the input to the function call, and blue indicates the return.][get_driver_connection_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/helper_functions/get_driver_connection.drawio.svg">
+  <img alt="get_driver_connection used on example circuit. Red textcolor indicates the input to the function call, and blue indicates the return." src="../figures/light-mode/helper_functions/get_driver_connection.drawio.svg">
+</picture>
 
 When calling the function, it would look somewhat like:
 

@@ -1,5 +1,3 @@
-[get_driven_ports_figure]: ../figures/helper_functions/get_driven_ports.drawio.svg
-
 # ```get_driven_ports```
 
 This function is a helper function!
@@ -87,7 +85,10 @@ This function will only work, if the following functions are sourced:
 
 Given the circuit below, if you use ```get_driven_ports``` on the IN port (marked in red), the returned value would be port OUT2 (marked in blue). Notice that the three pins connected to IN will not be returned, as they are not a ports!
 
-![get_driven_pins used on example circuit. Red textcolor indicates the input to the function call, and blue indicates the return.][get_driven_ports_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/helper_functions/get_driven_ports.drawio.svg">
+  <img alt="get_driven_ports used on example circuit. Red textcolor indicates the input to the function call, and blue indicates the return." src="../figures/light-mode/helper_functions/get_driven_ports.drawio.svg">
+</picture>
 
 When calling the function, it would look somewhat like:
 

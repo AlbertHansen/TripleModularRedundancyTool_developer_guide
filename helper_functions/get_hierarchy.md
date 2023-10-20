@@ -1,5 +1,3 @@
-[get_hierarchy_figure]: ../figures/helper_functions/get_hierarchy.drawio.svg
-
 # ```get_hierarchy```
 
 This is a helper function!
@@ -90,7 +88,10 @@ This function will only work, if the following function is sourced:
 
 Given the hierarchy below:
 
-![get_driven_pins used on example circuit. Red textcolor indicates the input to the function call, and blue indicates the return.][get_hierarchy_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/helper_functions/get_hierarchy.drawio.svg">
+  <img alt="get_hierarchy used on example circuit." src="../figures/light-mode/helper_functions/get_hierarchy.drawio.svg">
+</picture>
 
 If the function is called, the returned value would be:
 

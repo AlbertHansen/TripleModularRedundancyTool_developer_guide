@@ -1,5 +1,3 @@
-[is_cell_figure]: ../figures/helper_functions/is_cell.drawio.svg
-
 # ```ìs_port```
 
 This is a helper function!
@@ -47,7 +45,10 @@ This function will only work, if the following function is sourced:
 
 Given a circuit:
 
-![Example hierachy.][is_cell_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/helper_functions/is_cell.drawio.svg">
+  <img alt="Example circuit." src="../figures/light-mode/helper_functions/is_cell.drawio.svg">
+</picture>
 
 Calling the function on some of the elements will yield:
 
@@ -56,7 +57,7 @@ Calling the function on some of the elements will yield:
 false
 >> is_port OUT1
 true
->> is_cell U1/A
+>> is_port U1/A
 false
 ```
 
