@@ -18,7 +18,7 @@ The implementation leans heavily on **attributes** and has only been tested with
 * ```(*tmrg="value"*)```, where ```value``` is false/true
   * This can be applied to ports, register (inferred by sequential logic), and module instantiations
   * This signals the implementation that an element should not follow the default w.r.t triplication, but rather the set value of the attribute
-* "_Voted"-suffix 
+* "_Voted"-suffix
   * Can be applied to net declarations
   * Will create and insert 3 voters to create an intermediate vote of a net
 
