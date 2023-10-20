@@ -1,5 +1,3 @@
-[remove_ports_top_figure]: ../figures/rewire_scripts/remove_ports_top.drawio.svg
-
 # ```remove_ports_top```
 
 This is a *rewire* script!
@@ -48,4 +46,7 @@ This function will only work, if the following function is sourced:
 
 The figure below is a design with 1 input and 1 output port originally, however they have both been triplicated, leaving the original ports disconnected. The disconnected ports are removed by calling the script.
 
-![Example of removing the disconnected top ports][remove_ports_top_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/remove_ports_top.drawio.svg">
+  <img alt="Example of removing the disconnected top ports" src="../figures/light-mode/rewire_scripts/remove_ports_top.drawio.svg">
+</picture>

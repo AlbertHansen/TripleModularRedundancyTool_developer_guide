@@ -1,5 +1,3 @@
-[replace_cell_figure]: ../figures/rewire_scripts/replace_cell.drawio.svg
-
 # ```replace_cell```
 
 This is a *rewire* function!
@@ -79,6 +77,9 @@ In the figure below, ```U1``` is replaced with one of its replicants from tripli
 >> replace_cell U1 U1_A
 ```
 
-![Example of replacing a cell][replace_cell_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/replace_cell.drawio.svg">
+  <img alt="Example of replacing a cell" src="../figures/light-mode/rewire_scripts/replace_cell.drawio.svg">
+</picture>
 
 Notice that the original cell is removed from the design! This is different than ```replace_port``` which will leave original port, but disconnect it from the nets.

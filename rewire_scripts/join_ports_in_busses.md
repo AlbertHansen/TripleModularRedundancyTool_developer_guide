@@ -1,5 +1,3 @@
-[join_in_busses_figure]: ../figures/rewire_scripts/join_ports_in_busses.drawio.svg
-
 # ```join_ports_in_busses```
 
 This is a *rewire* script!
@@ -68,4 +66,7 @@ This function will only work, if the following function is sourced:
 
 ## Example
 
-![Before and after ports are joined in busses][join_in_busses_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/join_ports_in_busses.drawio.svg">
+  <img alt="Before and after ports are joined in busses" src="../figures/light-mode/rewire_scripts/join_ports_in_busses.drawio.svg">
+</picture>

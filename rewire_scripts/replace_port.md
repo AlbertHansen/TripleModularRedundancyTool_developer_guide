@@ -1,5 +1,3 @@
-[replace_port_figure]: ../figures/rewire_scripts/replace_port.drawio.svg
-
 # ```replace_port```
 
 This is a *rewire* function!
@@ -54,6 +52,9 @@ Calling the function:
 
 This will yield the following result:
 
-![Example of the replace_port function][replace_port_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/replace_port.drawio.svg">
+  <img alt="Example of the replace_port function" src="../figures/light-mode/rewire_scripts/replace_port.drawio.svg">
+</picture>
 
 Notice that the old port is not removed, unlike the ```replace_cell``` function. This is done in order to ensure that DC NXT can recognise the design, if it is instantiated in another design. The ports will be removed from one layer above during the ```triplicate_instances``` script or if the ports are on the top layer from the ```remove_ports_top``` script

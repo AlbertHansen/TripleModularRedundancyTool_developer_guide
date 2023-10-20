@@ -1,5 +1,3 @@
-[connect_figure]: ../figures/rewire_scripts/connect.drawio.svg
-
 # ```connect```
 
 This is a *rewire* script!
@@ -113,4 +111,7 @@ The figure below depicts before (marked in blue) and after (marked in red) of th
 >> connect U1/Z OUT2
 ```
 
-![Before and after "connect" call][connect_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/connect.drawio.svg">
+  <img alt="Before and after 'connect' call" src="../figures/light-mode/rewire_scripts/connect.drawio.svg">
+</picture>

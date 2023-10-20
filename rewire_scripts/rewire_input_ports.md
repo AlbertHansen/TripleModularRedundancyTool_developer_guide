@@ -1,5 +1,3 @@
-[rewire_input_ports_figure]: ../figures/rewire_scripts/rewire_input_ports.drawio.svg
-
 # ```rewire_input_ports```
 
 This is a *rewire* script
@@ -89,6 +87,9 @@ This function will only work, if the following functions are sourced:
 
 The figure below is the before and after of the script. The cells outlined in red represents the targeted ports of the script. During the script the replicants are found and redistributed or voted. The redistributed nets and the rewired nets are marked with a blue outline in the "after" part of the figure.
 
-![Small example of the rewire_input_ports affecting a port.][rewire_input_ports_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/rewire_input_ports.drawio.svg">
+  <img alt="Small example of the rewire_input_ports affecting a port." src="../figures/light-mode/rewire_scripts/rewire_input_ports.drawio.svg">
+</picture>
 
 Notice that the cells are already triplicated and rewired. Cells, registers, and module instantiations are handled in a separate function ```rewire_duped_cells```.

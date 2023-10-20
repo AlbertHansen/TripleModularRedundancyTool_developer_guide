@@ -1,5 +1,3 @@
-[vote_nets_figure]: ../figures/rewire_scripts/vote_nets.drawio.svg
-
 # ```vote_nets```
 
 This is a *rewire* script!
@@ -102,4 +100,7 @@ This function will only work, if the following functions are sourced:
 
 The figure below is an example of the before and after of running this script. Three voters (marked with blue) are inserted on a net suffixed with "_Voted" (marked in red).
 
-![A small example of a net being voted using the vote_nets routine][vote_nets_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/vote_nets.drawio.svg">
+  <img alt="A small example of a net being voted using the vote_nets routine" src="../figures/light-mode/rewire_scripts/vote_nets.drawio.svg">
+</picture>

@@ -1,5 +1,3 @@
-[create_voter_figure]: ../figures/rewire_scripts/create_voter.drawio.svg
-
 # ```create_voter```
 
 This is a *rewire* function! Every inserted voter is generated from this function.
@@ -284,4 +282,7 @@ In the figure below, the outcome of a 3-to-1 vote can be seen. The corresponding
 
 However, this function works best in tandem with the helper function ```get_replicant```, as this function would find all identical pins created during the *triplicate* routines.
 
-![Example of create_voter in action][create_voter_figure]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/rewire_scripts/create_voter.drawio.svg">
+  <img alt="Example of create_voter in action" src="../figures/light-mode/rewire_scripts/create_voter.drawio.svg">
+</picture>
