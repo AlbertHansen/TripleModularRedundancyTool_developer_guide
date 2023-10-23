@@ -28,7 +28,7 @@ proc rewire_duped_cells {} {
     # retrieve all cells with suffix _A (being one of a set of three replicants)
     set duped_cells [get_synopsys_value "get_cells -filter is_hierarchical==false -quiet *_A"]
 
-    # fetch all registers with tmrg = true
+    # fetch all registers
     set registers [get_synopsys_value "all_registers -no_hierarchy"]
     set registers [lsearch -all -inline -regexp $registers "\\S+_A"]
 

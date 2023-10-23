@@ -1,4 +1,4 @@
-# ```get_default_tmrg```
+# ```get_default_tmrt```
 
 This is a helper function!
 
@@ -15,8 +15,8 @@ Furthermore, when updating the ```tmr``` attribute on registers, ports, and modu
 ## Definition
 
 ```tcl
-proc get_default_tmrg { module } {
-    redirect -variable default {get_attribute $module default_tmrg}
+proc get_default_tmrt { module } {
+    redirect -variable default {get_attribute $module default_tmrt}
     return $default
 }
 ```
@@ -38,9 +38,9 @@ always_comb
 endmodule
 ```
 
-And you use ```get_default_tmrg``` to fetch the value:
+And you use ```get_default_tmrt``` to fetch the value:
 
 ```tcl
-get_default_tmrg INV
+get_default_tmrt INV
 >> false
 ```

@@ -1,4 +1,4 @@
-# ```update_tmrg```
+# ```update_tmrt```
 
 This is an *update* script!
 
@@ -12,30 +12,30 @@ Attributes defined in the RTL design will only propagate to:
 * Pins
 * Inferred registers
 
-Logic cells will not attain attributes defined in the RTL! The purpose of this function is to apply an appropriate value for the ```tmrg``` attribute on all logic cells within a design.
+Logic cells will not attain attributes defined in the RTL! The purpose of this function is to apply an appropriate value for the ```tmrt``` attribute on all logic cells within a design.
 
 ## Usage
 
-This script is called once per design and only after the ports and registers have their ```tmrg``` attribute set. To/from each port, register, and module instantiation with the ```tmrg``` attribute set to true, the logic cells will also have their attribute set to true. This is done in order to mark which logic cells will be triplicated during the *triplicate* routines.
+This script is called once per design and only after the ports and registers have their ```tmrt``` attribute set. To/from each port, register, and module instantiation with the ```tmrt``` attribute set to true, the logic cells will also have their attribute set to true. This is done in order to mark which logic cells will be triplicated during the *triplicate* routines.
 
 ## Definition
 
 ```tcl
-proc update_tmrg { top_default } {
+proc update_tmrt { top_default } {
     ##################################################################################
-    # This script updates the tmrg attribute on all logic cells, by looking from/to
-    # ports, registers, and module instantiaions with their tmrg attribute set to true
-    # any logic cell on these paths will have their tmrg attribute updated to true
+    # This script updates the tmrt attribute on all logic cells, by looking from/to
+    # ports, registers, and module instantiaions with their tmrt attribute set to true
+    # any logic cell on these paths will have their tmrt attribute updated to true
     #
     # input:  none
     # output: none
     ##################################################################################
 
-    # define default tmrg attribute
+    # define default tmrt attribute
     set design       [get_synopsys_value "current_design"]
-    set default_tmrg [get_synopsys_value "get_attribute -quiet -return_null_values $design default_tmrg"]
-    if {[llength $default_tmrg] < 1} {  ;# triggers if no default tmrg attribute is set
-        set default_tmrg $top_default
+    set default_tmrt [get_synopsys_value "get_attribute -quiet -return_null_values $design default_tmrt"]
+    if {[llength $default_tmrt] < 1} {  ;# triggers if no default tmrt attribute is set
+        set default_tmrt $top_default
     } 
 
     # retrieve all ports
@@ -46,7 +46,7 @@ proc update_tmrg { top_default } {
     set registers_in  ""
     set registers_out ""
 
-    # find all registers and their inputs and outputs, if tmrg==true use the voter's output instead
+    # find all registers and their inputs and outputs, if tmrt==true use the voter's output instead
     set registers [get_synopsys_value "all_registers -no_hierarchy"]
     foreach register $registers {
         # get input pins
@@ -78,8 +78,8 @@ proc update_tmrg { top_default } {
     # identify logic cells to be triplicated
     foreach port $ports_in {
         # skip port, if it isn't supposed to be triplicated  
-        set tmrg [get_tmrg $port]   
-        if {![expr $tmrg]} {
+        set tmrt [get_tmrt $port]   
+        if {![expr $tmrt]} {
             continue
         }
         
@@ -105,8 +105,8 @@ proc update_tmrg { top_default } {
 
     foreach port $ports_out {
         # skip port, if it isn't supposed to be triplicated  
-        set tmrg [get_tmrg $port]   
-        if {![expr $tmrg]} {
+        set tmrt [get_tmrt $port]   
+        if {![expr $tmrt]} {
             continue
         }
 
@@ -132,16 +132,16 @@ proc update_tmrg { top_default } {
 
     foreach register $registers_in {
 
-        # set tmrg to default, if not already set
+        # set tmrt to default, if not already set
         set register_cell [get_synopsys_value "cell_of $register"]
-        set tmrg          [get_tmrg $register_cell]
-        if {$tmrg < 0} {
-            set_tmrg $default_tmrg $register_cell
+        set tmrt          [get_tmrt $register_cell]
+        if {$tmrt < 0} {
+            set_tmrt $default_tmrt $register_cell
         }
 
         # skip register, if it isn't supposed to be triplicated
-        set tmrg [get_tmrg $register_cell]  
-        if {![expr $tmrg]} {
+        set tmrt [get_tmrt $register_cell]  
+        if {![expr $tmrt]} {
             continue
         }
 
@@ -167,16 +167,16 @@ proc update_tmrg { top_default } {
 
     foreach register $registers_out {
 
-        # set tmrg to default, if not already set
+        # set tmrt to default, if not already set
         set register_cell [get_synopsys_value "cell_of $register"]
-        set tmrg          [get_tmrg $register_cell]
-        if {$tmrg < 0} {
-            set_tmrg $default_tmrg $register_cell
+        set tmrt          [get_tmrt $register_cell]
+        if {$tmrt < 0} {
+            set_tmrt $default_tmrt $register_cell
         }
 
         # skip register, if it isn't supposed to be triplicated
-        set tmrg [get_tmrg $register_cell]  
-        if {![expr $tmrg]} {
+        set tmrt [get_tmrt $register_cell]  
+        if {![expr $tmrt]} {
             continue
         }
 
@@ -201,16 +201,16 @@ proc update_tmrg { top_default } {
     }
 
     foreach cell $hier_cells_in {
-        # set tmrg to default, if not already set
+        # set tmrt to default, if not already set
         set hier_cell [get_synopsys_value "cell_of $cell"]
-        set tmrg      [get_tmrg $hier_cell]
-        if {$tmrg < 0} {
-            set_tmrg $default_tmrg $hier_cell 
+        set tmrt      [get_tmrt $hier_cell]
+        if {$tmrt < 0} {
+            set_tmrt $default_tmrt $hier_cell 
         }
 
         # skip cell, if it isn't supposed to be triplicated
-        set tmrg [get_tmrg $hier_cell]
-        if {$tmrg != true} {
+        set tmrt [get_tmrt $hier_cell]
+        if {$tmrt != true} {
             continue
         }
 
@@ -235,16 +235,16 @@ proc update_tmrg { top_default } {
     }
 
     foreach cell $hier_cells_out {
-        # set tmrg to default, if not already set
+        # set tmrt to default, if not already set
         set hier_cell [get_synopsys_value "cell_of $cell"]
-        set tmrg      [get_tmrg $hier_cell]
-        if {$tmrg < 0} {
-            set_tmrg $default_tmrg $hier_cell 
+        set tmrt      [get_tmrt $hier_cell]
+        if {$tmrt < 0} {
+            set_tmrt $default_tmrt $hier_cell 
         }
 
         # skip cell, if it isn't supposed to be triplicated
-        set tmrg [get_tmrg $hier_cell]
-        if {$tmrg != true} {
+        set tmrt [get_tmrt $hier_cell]
+        if {$tmrt != true} {
             continue
         }
 
@@ -269,18 +269,18 @@ proc update_tmrg { top_default } {
     }
     
     set cells_to_be_triplicated [lsort -unique [join $cells_to_be_triplicated]]
-    set_tmrg true $cells_to_be_triplicated    ;# set tmrg attribute true on each cell of a path from/to
-                                               # a cell with tmrg attribute already true
+    set_tmrt true $cells_to_be_triplicated    ;# set tmrt attribute true on each cell of a path from/to
+                                               # a cell with tmrt attribute already true
 }
 ```
 
 ## Example
 
-Below is a figure of the before and after of this script being called on a simple design. The red outlines mark the targets for the functions, the blue outlines mark the affected elements, the orange text indicates ```tmrg``` attribute is set to true.
+Below is a figure of the before and after of this script being called on a simple design. The red outlines mark the targets for the functions, the blue outlines mark the affected elements, the orange text indicates ```tmrt``` attribute is set to true.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/update_tmrg.drawio.svg">
-  <img alt="Example of updating the tmrg attribute for logic cells" src="../figures/light-mode/update_scripts/update_tmrg.drawio.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/update_scripts/update_tmrt.drawio.svg">
+  <img alt="Example of updating the tmrt attribute for logic cells" src="../figures/light-mode/update_scripts/update_tmrt.drawio.svg">
 </picture>
 
-In this case one or more of the ports could be changed for a register or module instantiation with same value on the ```tmrg``` attribute and the result would be the same
+In this case one or more of the ports could be changed for a register or module instantiation with same value on the ```tmrt``` attribute and the result would be the same

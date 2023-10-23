@@ -30,9 +30,9 @@ proc triplicate_cell { cell } {
     }
 
     # verify that it should be triplicated
-    set tmrg [get_tmrg $cell]
-    if {$tmrg != true} {
-        puts "tmrg attribute on cell $cell is not set to true, and the cell will not be triplicated!"
+    set tmrt [get_tmrt $cell]
+    if {$tmrt != true} {
+        puts "tmrt attribute on cell $cell is not set to true, and the cell will not be triplicated!"
         return
     }
 
@@ -43,7 +43,7 @@ proc triplicate_cell { cell } {
 
     # create cells
     create_cell    [list $cell_A $cell_B $cell_C] $cell
-    set_tmrg true  [list $cell_A $cell_B $cell_C]
+    set_tmrt true  [list $cell_A $cell_B $cell_C]
     set_dont_touch [list $cell_A $cell_B $cell_C]
 
     # replace original cell with cell_A
@@ -77,7 +77,7 @@ An example of the function call:
 >> triplicate_cell U1
 ```
 
-The names marked in orange indicate that their ```tmrg``` attribute has been set to true. The red outline marks the target, and the blue outline marks the changes that has happened.
+The names marked in orange indicate that their ```tmrt``` attribute has been set to true. The red outline marks the target, and the blue outline marks the changes that has happened.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/triplicate_scripts/triplicate_cell.drawio.svg">

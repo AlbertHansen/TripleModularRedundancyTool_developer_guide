@@ -25,8 +25,8 @@ proc get_replicants { element } {
 
     # cells (without pins)
     if {[is_cell $element]} {
-        set tmrg [get_tmrg $element]
-        if {$tmrg != "true"} {
+        set tmrt [get_tmrt $element]
+        if {$tmrt != "true"} {
             return $element
         }
 
@@ -53,8 +53,8 @@ proc get_replicants { element } {
 
     # ports
     if {[is_port $element]} {
-        set tmrg [get_tmrg $element]
-        if {$tmrg != "true"} {
+        set tmrt [get_tmrt $element]
+        if {$tmrt != "true"} {
             return $element
         }
 
@@ -82,12 +82,12 @@ proc get_replicants { element } {
     # pins (potentially on cells)
     set cell      [get_synopsys_value "cell_of $element"]
     set pin       [lindex [split $element "/"] end]
-    set cell_tmrg [get_tmrg $cell]
-    set pin_tmrg  [get_tmrg $element]
+    set cell_tmrt [get_tmrt $cell]
+    set pin_tmrt  [get_tmrt $element]
 
     # create regexp 
     set regex ""
-    if {$cell_tmrg != "true"} {
+    if {$cell_tmrt != "true"} {
 
         # use the basic cell 
         set regex [join [list $regex $cell] ""]
@@ -109,7 +109,7 @@ proc get_replicants { element } {
         set regex [join [list $base "\\\[ABC\\\]" ] "_"]
         
     }
-    if {$pin_tmrg != "true"} {
+    if {$pin_tmrt != "true"} {
 
         # use the basic pin
         set regex [join [list $regex $pin] "/"]
@@ -145,7 +145,7 @@ This function will only work, if the following functions are sourced:
 
 * ```is_cell```
 * ```is_port```
-* ```get_tmrg```
+* ```get_tmrt```
 * ```get_synopsys_value```
 
 ## Example

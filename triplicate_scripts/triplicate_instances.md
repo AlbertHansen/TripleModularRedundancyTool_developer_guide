@@ -8,7 +8,7 @@ The purpose of the script is to triplicate module instantiations separately from
 
 ## Usage
 
-After the ```tmrg``` attribute has been updated appropriately on ports, cells, registers, and module instantiations, this script is run. The script triplicates all module instantiations and the inputs of the replicants are rewired to be driven by the same source as the original.
+After the ```tmrt``` attribute has been updated appropriately on ports, cells, registers, and module instantiations, this script is run. The script triplicates all module instantiations and the inputs of the replicants are rewired to be driven by the same source as the original.
 
 Renaming of ports from within a design is problematic, since there are no biult-in renaming functions. Replacing a port with an identical port of a different name is possible, however the original port should not be removed from within a design. If the ports are removed from within a design, the module instantations of the design will not recognise the correct designs. To compensate for this problem, when this script is called, the unconnected ports of the instantiations are removed using a built-in function.
 
@@ -30,8 +30,8 @@ proc triplicate_instances {} {
     foreach instance $instances {
         set pins_in [get_synopsys_value "get_pins -of_object $instance -filter pin_direction==in"] 
 
-        set tmrg [get_tmrg $instance]
-        set_attribute $instance tmrg false
+        set tmrt [get_tmrt $instance]
+        set_attribute $instance tmrt false
         foreach pin $pins_in {
 
             # check if triplicated 
@@ -42,11 +42,11 @@ proc triplicate_instances {} {
             }
 
             # find replicants and connect to the same driver as the original
-            set_attribute $pin_A tmrg true
+            set_attribute $pin_A tmrt true
             set pin_replicants [get_replicants $pin_A]
-            set_attribute $pin_replicants tmrg true
+            set_attribute $pin_replicants tmrt true
             set pin_replicants [get_replicants $pin_A]
-            set_attribute $pin_replicants tmrg true
+            set_attribute $pin_replicants tmrt true
             set driver         [get_driver_connection $pin]
             connect $driver $pin_replicants
 
@@ -74,11 +74,11 @@ proc triplicate_instances {} {
             }
 
             # find replicants and connect to the same driver as the original
-            set_attribute $pin_A tmrg true
+            set_attribute $pin_A tmrt true
             set pin_replicants [get_replicants $pin_A]
-            set_attribute $pin_replicants tmrg true
+            set_attribute $pin_replicants tmrt true
             set pin_replicants [get_replicants $pin_A]
-            set_attribute $pin_replicants tmrg true
+            set_attribute $pin_replicants tmrt true
         
             set driven_pins    [get_driven_pins $pin]
             set driven_ports   [get_driven_ports $pin]
@@ -86,7 +86,7 @@ proc triplicate_instances {} {
             connect $pin_A $driven
 
         }
-        set_attribute $instance tmrg $tmrg
+        set_attribute $instance tmrt $tmrt
     }
 
     # uniquify the newly triplicated instances
@@ -97,18 +97,18 @@ proc triplicate_instances {} {
     }
 
     # triplicate the instance (reusing triplicate cell)
-    set instances [get_synopsys_value "get_cells -filter {tmrg==true && is_hierarchical==true}"]
+    set instances [get_synopsys_value "get_cells -filter {tmrt==true && is_hierarchical==true}"]
     foreach instance $instances {
         triplicate_cell $instance   
     }
 
-    # update pin tmrg
+    # update pin tmrt
     set instances [get_synopsys_value "get_cells -filter {is_hierarchical==true}"]
     foreach instance $instances {
 
         set pins [get_synopsys_value "get_pins -of_object $instance"]
         set pins [lsearch -all -inline -regexp $pins {[^ ]+_[ABC](?=\s|$)}]
-        set_attribute $pins tmrg true
+        set_attribute $pins tmrt true
     }
 }
 ```
@@ -116,7 +116,7 @@ proc triplicate_instances {} {
 This function will only work, if the following functions are sourced:
 
 * ```get_synopsys_value```
-* ```get_tmrg```
+* ```get_tmrt```
 * ```get_replicants```
 * ```get_driver_connection```
 * ```get_driven_pins```
@@ -126,7 +126,7 @@ This function will only work, if the following functions are sourced:
 
 ## Example
 
-The before and after of the script being called. The red outlines mark the targeted elements of the design, the orange text marks that the ```tmrg``` attribute is set to true and have been/should be triplicated. The blue outline or text indicates where the script has affected the design.
+The before and after of the script being called. The red outlines mark the targeted elements of the design, the orange text marks that the ```tmrt``` attribute is set to true and have been/should be triplicated. The blue outline or text indicates where the script has affected the design.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../figures/dark-mode/triplicate_scripts/triplicate_instances.drawio.svg">

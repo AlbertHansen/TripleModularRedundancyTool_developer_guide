@@ -18,7 +18,7 @@ The purpose of this script is to facilitate and execute the triplication process
 
 ## Usage/flow
 
-This is the main script, wherefrom all other scripts and functions are directly or indeirectly called. This means it is called only once! The flowchart is shown in the figure below.
+This is the main script, wherefrom all other scripts and functions are directly or indirectly called. This means it is called only once! The flowchart is shown in the figure below.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/flowchart_v3.drawio.svg">
@@ -35,7 +35,7 @@ set_app_var collection_result_display_limit 100000  ;# important! ensures search
 set_app_var compile_ultra_ungroup_small_hierarchies false
 
 # source custom functions
-source /projects/TSMC28/devel28/V09eval/workAreas/alhansen/synopsys_TMR_test/libs/tmrg_lib.tcl
+source /projects/TSMC28/devel28/V09eval/workAreas/alhansen/synopsys_TMR_test/libs/tmrt_lib.tcl
 
 # Acquire license
 get_license Design-Compiler-NXT
@@ -52,16 +52,16 @@ read_file -format sverilog            ../../example_timer/timer.sv
 set top_design [get_top_design]
 current_design $top_design
 
-# Find default tmrg
-redirect -variable tmrg {get_attribute $top_design default_tmrg}
-set top_default [join $tmrg]
+# Find default tmrt
+redirect -variable tmrt {get_attribute $top_design default_tmrt}
+set top_default [join $tmrt]
 
 
-# update deafult tmrg for designs, and update tmrg for ports and registers (non-overriding)
-update_design_default_tmrg
+# update deafult tmrt for designs, and update tmrt for ports and registers (non-overriding)
+update_design_default_tmrt
 
-update_reg_tmrg  $top_design
-update_port_tmrg $top_design
+update_reg_tmrt  $top_design
+update_port_tmrt $top_design
 
 compile_ultra -no_autoungroup
 
@@ -70,7 +70,7 @@ set designs [get_synopsys_value "get_designs"]
 
 foreach design $designs {
     current_design $design
-    update_tmrg $top_default
+    update_tmrt $top_default
     triplicate_cells
     triplicate_input_ports
     triplicate_output_ports

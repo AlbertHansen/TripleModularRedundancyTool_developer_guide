@@ -121,7 +121,7 @@ proc create_voter { inputs outputs } {
         set sub_voter_B ""
         set sub_voter_C ""
         if {![is_port [lindex $outputs 0]]} {
-            set base_cell [get_synopsys_value "cell_of [lindex $tmrg_instance_pins 0]"]
+            set base_cell [get_synopsys_value "cell_of [lindex $tmrt_instance_pins 0]"]
             set base_cell    [join $base_cell]
             set base_pin     [lindex [split [lindex $outputs end] "/"] end]
             set master_voter [join [list $base_cell $base_pin "Master" "Voter"] "_"]

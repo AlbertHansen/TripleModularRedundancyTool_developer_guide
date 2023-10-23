@@ -29,9 +29,9 @@ proc triplicate_port { port } {
     }
 
     # verify that it should be triplicated
-    set tmrg [get_tmrg $port]
-    if {$tmrg != true} {
-        puts "tmrg attribute on port $port is not set to true, and the port will not be triplicated!"
+    set tmrt [get_tmrt $port]
+    if {$tmrt != true} {
+        puts "tmrt attribute on port $port is not set to true, and the port will not be triplicated!"
         return
     }
 
@@ -46,8 +46,8 @@ proc triplicate_port { port } {
     # create ports
     create_port    [list $port_A $port_B $port_C] -direction $direction
 
-    # add tmrg attribute
-    set_tmrg true  [list $port_A $port_B $port_C]
+    # add tmrt attribute
+    set_tmrt true  [list $port_A $port_B $port_C]
 
     # # replace original port with port_A
     replace_port $port $port_A
@@ -64,7 +64,7 @@ proc triplicate_port { port } {
 This function will only work, if the following functions are sourced:
 
 * ```is_port```
-* ```get_tmrg```
+* ```get_tmrt```
 * ```get_synopsys_value```
 * ```replace_port```
 

@@ -12,10 +12,10 @@ The TripleModularRedundancyTool was created as a part of a short-term internship
 
 The implementation leans heavily on **attributes** and has only been tested with [SystemVerilog attributes (see pp. 236--240)](https://spdocs.synopsys.com/dow_retrieve/qsc-u/dg/dcolh/U-2022.12-SP3/dcolh/pdf/svug.pdf). The way to interact with the implementation is through two attributes and a suffix:
 
-* ```(*default_tmrg="value"*)```, where ```value``` is false/true
+* ```(*default_tmrt="value"*)```, where ```value``` is false/true
   * This should be applied to module declarations
-  * This is the default value for whether or not ports, registers, and module instantiations should be triplicated. This will not override the ```tmrg``` attribute if already set
-* ```(*tmrg="value"*)```, where ```value``` is false/true
+  * This is the default value for whether or not ports, registers, and module instantiations should be triplicated. This will not override the ```tmrt``` attribute if already set
+* ```(*tmrt="value"*)```, where ```value``` is false/true
   * This can be applied to ports, register (inferred by sequential logic), and module instantiations
   * This signals the implementation that an element should not follow the default w.r.t triplication, but rather the set value of the attribute
 * "_Voted"-suffix
@@ -25,24 +25,24 @@ The implementation leans heavily on **attributes** and has only been tested with
 As the TripleModularRedundancyTool currently stands, the design philosophy follows three steps (in order)
 
 1. **Update**: Updating/propagating the values of the attribute mentioned above to other cells, ports, etc.
-2. **Triplicate**: Creating 3 replicants of the elements with ```tmrg="true"```
+2. **Triplicate**: Creating 3 replicants of the elements with ```tmrt="true"```
 3. **Rewire**: Drive all new cells appropriately, which includes voting when appropriate
 
-To visualise the three steps the following figures were created, note that blue outline indicates a change of the circuitry. A piece of RTL design with two input ports (could also have been output pins from module instantiations or registers), two logic cells, and an output port (could also be input pins to module instantiations or registers). From the RTL the ```tmrg``` attribute has been set to true on input port B, marked with a orange text.
+To visualise the three steps the following figures were created, note that blue outline indicates a change of the circuitry. A piece of RTL design with two input ports (could also have been output pins from module instantiations or registers), two logic cells, and an output port (could also be input pins to module instantiations or registers). From the RTL the ```tmrt``` attribute has been set to true on input port B, marked with a orange text.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_0.drawio.svg">
   <img alt="Base case" src="figures/light-mode/3-steps_0.drawio.svg">
 </picture>
 
-The **update step** applies the ```tmrg``` attribute set to true on all reachable logic cells from port B. This is visualised below with the orange text.
+The **update step** applies the ```tmrt``` attribute set to true on all reachable logic cells from port B. This is visualised below with the orange text.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_1.drawio.svg">
   <img alt="Step 1: Update" src="figures/light-mode/3-steps_1.drawio.svg">
 </picture>
 
-Every element with the ```tmrg``` attribute set to true a fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
+Every element with the ```tmrt``` attribute set to true a fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_2.drawio.svg">
@@ -67,7 +67,7 @@ Before you continue the development of the tool, there are a few things, concept
 * [TCL 8.6 (Tool Command Language)](https://www.tcl.tk/man/tcl8.6/TclCmd/contents.html)
   * The language used to interact with the Synopsys tools
 * TMR (Triple Modular Redundancy)
-  * There are several TMR strategies worth investigating. A good start would be looking at the current [TMRG](https://tmrg.web.cern.ch/tmrg/) used by CERN at the time of writing as this documentation.
+  * There are several TMR strategies worth investigating. A good start would be looking at the current [tmrt](https://tmrt.web.cern.ch/tmrt/) used by CERN at the time of writing as this documentation.
 * Synopsys' Design Compiler NXT (Will require a SolvNet user)
   * [Design Compiler User Guide](https://spdocs.synopsys.com/dow_retrieve/qsc-t/dg/dcolh/T-2022.03/dcolh/Default.htm#dcug/pdf/dcug.pdf)
   * [Functional Safety for Implementation User Guide](https://spdocs.synopsys.com/dow_retrieve/qsc-t/dg/dcolh/T-2022.03/dcolh/Default.htm#fsiug/pdf/fsiug.pdf)
@@ -109,7 +109,7 @@ The main script can be found in [```main_script```](main_script.md) with a flowc
 The scripts and functions used in this tool have been separated in four categories; *update*, *triplicate*, *rewire*, and helper functions, where the first three correspond to the steps in the design philosophy presented above. Every function has been documented with focus on *purpose*, *usage*, *definition*, and an *example* with a figure if applicable.
 
 * [Helper functions](helper_functions/)
-  * [```get_default_tmrg```](helper_functions/get_default_tmrg.md)
+  * [```get_default_tmrt```](helper_functions/get_default_tmrt.md)
   * [```get_driven_pins```](helper_functions/get_driven_pins.md)
   * [```get_driven_ports```](helper_functions/get_driven_ports.md)
   * [```get_driver_connection```](helper_functions/get_driver_connection.md)
@@ -121,12 +121,12 @@ The scripts and functions used in this tool have been separated in four categori
   * [```is_port```](helper_functions/is_port.md)
   * [```lremove```](helper_functions/lremove.md)
 * [Update scripts and functions](update_scripts/)
-  * [```get_tmrg```](update_scripts/get_tmrg.md)
-  * [```set_tmrg```](update_scripts/set_tmrg.md)
-  * [```update_design_default_tmrg```](update_scripts/update_design_default_tmrg.md)
-  * [```update_port_tmrg```](update_scripts/update_port_tmrg.md)
-  * [```update_reg_tmrg```](update_scripts/update_reg_tmrg.md)
-  * [```update_tmrg```](update_scripts/update_tmrg.md)
+  * [```get_tmrt```](update_scripts/get_tmrt.md)
+  * [```set_tmrt```](update_scripts/set_tmrt.md)
+  * [```update_design_default_tmrt```](update_scripts/update_design_default_tmrt.md)
+  * [```update_port_tmrt```](update_scripts/update_port_tmrt.md)
+  * [```update_reg_tmrt```](update_scripts/update_reg_tmrt.md)
+  * [```update_tmrt```](update_scripts/update_tmrt.md)
 * [Triplicate scripts and functions](triplicate_scripts/)
   * [```triplicate_cell```](triplicate_scripts/triplicate_cell.md)
   * [```triplicate_cells```](triplicate_scripts/triplicate_cells.md)
@@ -151,15 +151,15 @@ Since this implementation was created over a relatively short period, some featu
 
 * See if it is worth using [**collections (see ch. 6)**](https://spdocs.synopsys.com/dow_retrieve/qsc-u/dg/dcolh/U-2022.12-SP3/dcolh/pdf/tclug.pdf)
 * Rewrite some functions
-  * [```update_port_tmrg```](update_scripts/update_port_tmrg.md) and [```update_reg_tmrg```](update_scripts/update_reg_tmrg.md) still using ```redirect``` instead of [```get_synopsys_value```](helper_functions/get_synopsys_value.md). Furthermore, they go through the entire hierarchy instead of being called once per design (include them in the *loop*)
+  * [```update_port_tmrt```](update_scripts/update_port_tmrt.md) and [```update_reg_tmrt```](update_scripts/update_reg_tmrt.md) still using ```redirect``` instead of [```get_synopsys_value```](helper_functions/get_synopsys_value.md). Furthermore, they go through the entire hierarchy instead of being called once per design (include them in the *loop*)
 * Change naming scheme
-  * To create three intermediate voters, nets are suffixed with "_Voted", however to gain continuity with the current TMRG the suffix should just be "Voted"
-  * Replicants are suffixed with "_A", "_B", and "_C", but to gain contiunity with the current TMRG the suffixes should lose the underscore.
-* Include the missing functionalities (see [TMRG](https://tmrg.web.cern.ch/tmrg/))
+  * To create three intermediate voters, nets are suffixed with "_Voted", however to gain continuity with the current tmrt the suffix should just be "Voted"
+  * Replicants are suffixed with "_A", "_B", and "_C", but to gain contiunity with the current tmrt the suffixes should lose the underscore.
+* Include the missing functionalities (see [tmrt](https://tmrt.web.cern.ch/tmrt/))
   * Slicing
   * Using the error signal
   * etc.
-* Include a way to control how the ```tmrg``` attribute is propagated trough the combinatorial logic
+* Include a way to control how the ```tmrt``` attribute is propagated trough the combinatorial logic
   * Tie it to the default?
   * Create another attribute that can be applied to designs?
 * Check the documentation for improved TMR built-in functions
