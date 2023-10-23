@@ -22,7 +22,7 @@ This is the main script, wherefrom all other scripts and functions are directly 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/flowchart_v3.drawio.svg">
-  <img alt="Flowchart" src="figures/dark-mode/flowchart_v3.drawio.svg">
+  <img alt="Flowchart" src="figures/light-mode/flowchart_v3.drawio.svg">
 </picture>
 
 ## Definition
