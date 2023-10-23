@@ -179,4 +179,4 @@ Feel free to contact me with questions about the implementation!
 
 ### Whatsapp
 
-![Whatsapp QR-code](figures/whatsapp_qr.jpg)
+<img src="figures/whatsapp_qr.jpg" alt="Whatsapp QR-code" width="200"/>
