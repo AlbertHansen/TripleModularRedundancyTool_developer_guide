@@ -67,7 +67,7 @@ Before you continue the development of the tool, there are a few things, concept
 * [TCL 8.6 (Tool Command Language)](https://www.tcl.tk/man/tcl8.6/TclCmd/contents.html)
   * The language used to interact with the Synopsys tools
 * TMR (Triple Modular Redundancy)
-  * There are several TMR strategies worth investigating. A good start would be looking at the current [tmrt](https://tmrt.web.cern.ch/tmrt/) used by CERN at the time of writing as this documentation.
+  * There are several TMR strategies worth investigating. A good start would be looking at the current [TMRG](https://tmrt.web.cern.ch/tmrt/) used by CERN at the time of writing as this documentation.
 * Synopsys' Design Compiler NXT (Will require a SolvNet user)
   * [Design Compiler User Guide](https://spdocs.synopsys.com/dow_retrieve/qsc-t/dg/dcolh/T-2022.03/dcolh/Default.htm#dcug/pdf/dcug.pdf)
   * [Functional Safety for Implementation User Guide](https://spdocs.synopsys.com/dow_retrieve/qsc-t/dg/dcolh/T-2022.03/dcolh/Default.htm#fsiug/pdf/fsiug.pdf)
@@ -153,8 +153,8 @@ Since this implementation was created over a relatively short period, some featu
 * Rewrite some functions
   * [```update_port_tmrt```](update_scripts/update_port_tmrt.md) and [```update_reg_tmrt```](update_scripts/update_reg_tmrt.md) still using ```redirect``` instead of [```get_synopsys_value```](helper_functions/get_synopsys_value.md). Furthermore, they go through the entire hierarchy instead of being called once per design (include them in the *loop*)
 * Change naming scheme
-  * To create three intermediate voters, nets are suffixed with "_Voted", however to gain continuity with the current tmrt the suffix should just be "Voted"
-  * Replicants are suffixed with "_A", "_B", and "_C", but to gain contiunity with the current tmrt the suffixes should lose the underscore.
+  * To create three intermediate voters, nets are suffixed with "_Voted", however to gain continuity with the current TMRG the suffix should just be "Voted"
+  * Replicants are suffixed with "_A", "_B", and "_C", but to gain contiunity with the current TMRG the suffixes should lose the underscore.
 * Include the missing functionalities (see [tmrt](https://tmrt.web.cern.ch/tmrt/))
   * Slicing
   * Using the error signal
