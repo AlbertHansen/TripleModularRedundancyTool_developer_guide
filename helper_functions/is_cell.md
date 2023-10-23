@@ -1,4 +1,4 @@
-# ```ìs_cell```
+# ```is_cell```
 
 This is a helper function!
 
