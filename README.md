@@ -1,6 +1,8 @@
 # Triple Modular Redundancy Tool - Developer Guide
 
-The goal of this repository is to *ensure further development is approachable* for the TripleModularRedundancyTool developed in the second half of 2023.
+The goal of this repository is to *ensure further development is approachable* for the TripleModularRedundancyTool developed in the second half of 2023. 
+
+If the reader is interested in how to interact with the implementation through the RTL see [TripleModularRedundancyTool User Guide](interaction_with_implementation.md).
 
 ## Context
 
