@@ -58,11 +58,13 @@ To see how the "_Voted"-suffix is handled and voted see **Example** in [```vote_
 
 ## Examples
 
-The following examples are recreated from the current [TMRG](https://tmrg.web.cern.ch/tmrg/).
+The following examples are recreated from the currently utilised [TMRG](https://tmrg.web.cern.ch/tmrg/).
 
 ---
 
 ### Combinatorial Logic - Full Triplication
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration. This signals the implementation that all ports belonging to ```comb02``` should be triplicated. This will force the combinatorial logic between the ports to also be triplicated.
 
 ```sv
 (*default_tmrt="true"*)
@@ -79,6 +81,8 @@ module comb02 (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```comb02```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted line indicates that the ```default_tmrt``` attribute has been set to true. The orange text indicates the elements, where the ```tmrt``` attribute has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/user_guide_examples/comb_logic/comb02_full_triplication.drawio.svg">
   <img alt="Full triplication" src="figures/light-mode/user_guide_examples/comb_logic/comb02_full_triplication.drawio.svg">
@@ -87,6 +91,8 @@ endmodule
 ---
 
 ### Combinatorial Logic - Logic and Output Triplication
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **port**. This signals the implementation that all ports except *in* belonging to ```comb03``` should be triplicated. This will force the combinatorial logic between the ports to also be triplicated, and a **fanout** from *in*.
 
 ```sv
 (*default_tmrt="true"*)
@@ -103,6 +109,8 @@ module comb03 (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```comb03```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted line indicates that the ```default_tmrt``` attribute has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\comb_logic\comb03_logic_and_output_triplication.drawio.svg">
   <img alt="Logic and output triplication" src="figures\light-mode\user_guide_examples\comb_logic\comb03_logic_and_output_triplication.drawio.svg">
@@ -111,6 +119,8 @@ endmodule
 ---
 
 ### Combinatorial Logic - Input and Logic Triplication
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **port**. This signals the implementation that all ports except *out* belonging to ```comb04``` should be triplicated. This will force the combinatorial logic between the ports to also be triplicated, and the creation of a **majority voter** to *out*.
 
 ```sv
 (*default_tmrt="true"*)
@@ -127,6 +137,8 @@ module comb04 (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```comb04```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted line indicates that the ```default_tmrt``` attribute has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\comb_logic\comb04_input_and_logic_triplication.drawio.svg">
   <img alt="Input and logic triplication" src="figures\light-mode\user_guide_examples\comb_logic\comb04_input_and_logic_triplication.drawio.svg">
@@ -136,9 +148,13 @@ endmodule
 
 ### Combinatorial Logic - Logic Triplication
 
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **module instantiation**. This signals the implementation that everything except *comb_logic0* belonging to ```comb05``` should not be triplicated. This will force the creation of a **majority voter** to *out*.
+
+The reason for the extra module declaration is that it is impossible to pass attributes directly to logic cells, and this is a workaround.
+
 ```sv
 (*default_tmrt="false"*)
-module comb02 (
+module comb05 (
     input  in,
     output out
 );
@@ -161,6 +177,8 @@ module combLogic (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```comb05```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The pink dotted lines indicates that the ```default_tmrt``` attribute has been set to false on the module declaration associated with the contents. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\comb_logic\comb05_logic_triplication.drawio.svg">
   <img alt="Logic and output triplication" src="figures\light-mode\user_guide_examples\comb_logic\comb05_logic_triplication.drawio.svg">
@@ -169,6 +187,10 @@ endmodule
 ---
 
 ### Combinatorial Logic - Input and Output Triplication
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **module instantiation**. This signals the implementation that everything except *comb_logic0* belonging to ```comb06``` should be triplicated. This will force the creation of a **majority voter** from *in*.
+
+The reason for the extra module declaration is that it is impossible to pass attributes directly to logic cells, and this is a workaround.
 
 ```sv
 (*default_tmrt="true"*)
@@ -196,6 +218,8 @@ module combLogic (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```comb06```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The pink dotted lines indicates that the ```default_tmrt``` attribute has been set to false on the module declaration associated with the contents, whereas orange indicates it has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\comb_logic\comb06_input_and_output_triplication.drawio.svg">
   <img alt="Input and output triplication" src="figures\light-mode\user_guide_examples\comb_logic\comb06_input_and_output_triplication.drawio.svg">
@@ -204,6 +228,10 @@ endmodule
 ---
 
 ### Voting Logic - Throughput Voting
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the suffix "_Voted" added to a net (indirectly). This signals the implementation that everything should be triplicated, and the net should be voted. This will force the creation of three **majority voter** from *in* to *out_Voted*.
+
+The reason that the output port has been renamed is that the names of nets are unwieldy from the RTL design. Adding an intermediate ```logic net_Voted``` would've been removed when the RTL is read, and the net between *in* and *out* inherits the name from the output port.
 
 ```sv
 (*default_tmrt="true"*)
@@ -217,6 +245,8 @@ module vote01(
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```vote01```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents. The orange text indicates that the ```tmrt``` attribute has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\vote\vote01.drawio.svg">
   <img alt="Throughput Voting" src="figures\light-mode\user_guide_examples\vote\vote01.drawio.svg">
@@ -225,6 +255,10 @@ endmodule
 ---
 
 ### Voting Logic - Vote Before and After Combinatorial Logic
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the suffix "_Voted" added to a net (indirectly). This signals the implementation that everything should be triplicated, and the nets should be voted. This will force the creation of three **majority voter** from *in* to *out_Voted*.
+
+The reason that the input and output ports have been renamed is that the names of nets are unwieldy from the RTL design. Adding an intermediate ```logic net_Voted``` would've been removed when the RTL is read, and the net between *in* and *combLogic* inherits the name from the input port and between *combLogic* and *out* inherits the name from the output port.
 
 ```sv
 (*default_tmrt="true"*)
@@ -241,6 +275,8 @@ module vote02(
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```vote02```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents. The orange text indicates that the ```tmrt``` attribute has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\vote\vote02.drawio.svg">
   <img alt="Vote before and after combinatorial logic" src="figures\light-mode\user_guide_examples\vote\vote02.drawio.svg">
@@ -249,6 +285,8 @@ endmodule
 ---
 
 ### Finite State Machine - Triplication Without Voting
+
+This example utilises the ```default_tmrt``` attribute set on the module declaration. This signals the implementation that everything should be triplicated.
 
 ```sv
 (*default_tmrt="true"*)
@@ -272,6 +310,8 @@ module fsm01 (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```fsm01```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents or the ```tmrt``` attribute has been set to true on an inferred register. The orange text indicates that the ```tmrt``` attribute has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\fsm\fsm01_triplication_without_voting.drawio.svg">
   <img alt="Triplication without voting" src="figures\light-mode\user_guide_examples\fsm\fsm01_triplication_without_voting.drawio.svg">
@@ -281,7 +321,44 @@ endmodule
 
 ### Finite State Machine - Triplication With Voting
 
-Not entirely possible (inserts 2 voters instead of one)... Could be fixed with a bit of tinkering. In this case it might be better to use ```create_safety_register_rule -type triple_mode```.
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the suffix "_Voted" attached to the ```logic``` input to the D flip-flop. This signals the implementation that everything should be triplicated and to create 3 voters just before the inferred registers.
+
+```sv
+(*default_tmrt="true"*)
+module fsm02 (
+    input  in,
+    input  clk,
+    output out
+);
+
+    logic state;
+    logic state_next_Voted;
+
+    assign out = state;
+
+    always_ff @(posedge clk)
+        state <= state_next_Voted;
+
+    always_comb
+        state_next_Voted = in ^ state;
+
+endmodule
+```
+
+The figure below shows the before and after of the triplication of ```fsm02```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents or the ```tmrt``` attribute has been set to true on an inferred register. The orange text indicates that the ```tmrt``` attribute has been set to true.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\fsm\fsm02_triplication_with_voting.drawio.svg">
+  <img alt="Triplication with voting" src="figures\light-mode\user_guide_examples\fsm\fsm02_triplication_with_voting.drawio.svg">
+</picture>
+
+---
+
+### Finite State Machine - Triplicating only the register
+
+This example utilises the ```default_tmrt``` attribute set on two module declarations and the ```tmrt``` attribute set on a **sequential block**. This signals the implementation that only the registers should be triplicated and to create a voters just after the inferred registers.
+
+The reason for the extra module declaration is that it is impossible to pass attributes directly to logic cells, and this is a workaround.
 
 ```sv
 (*default_tmrt="false"*)
@@ -319,18 +396,7 @@ module combLogic (
 endmodule
 ```
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\fsm\fsm02_triplication_with_voting.drawio.svg">
-  <img alt="Triplication with voting" src="figures\light-mode\user_guide_examples\fsm\fsm02_triplication_with_voting.drawio.svg">
-</picture>
-
----
-
-### Finite State Machine - Triplicating only the register
-
-```sv
-
-```
+The figure below shows the before and after of the triplication of ```fsm03```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The pink dotted lines indicates that the ```default_tmrt``` attribute has been set to false on the module declaration associated with the contents or the ```tmrt``` attribute has been set to false on an inferred register, whereas orange indicates it has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\fsm\fsm03_triplicating_only_the_register.drawio.svg">
@@ -341,9 +407,47 @@ endmodule
 
 ### Finite State Machine - Triplicating the Register and Clock Skew
 
-```sv
+This example utilises the ```default_tmrt``` attribute set on module declarations and the ```tmrt``` attribute set on a **sequential block** and a **port**. This signals the implementation that only the registers and the *clk* port should be triplicated and to create a voters just after the inferred registers.
 
+The reason for the extra module declaration is that it is impossible to pass attributes directly to logic cells, and this is a workaround.
+
+```sv
+(*default_tmrt="false"*)
+module fsm04 (
+    input  in,
+    (*tmrt="true"*) input  clk,
+    output out
+);
+
+    logic state;
+    logic state_next;
+
+    assign out = state;
+
+    (*tmrt="true"*)
+    always_ff @(posedge clk)
+        state <= state_next;
+
+    combLogic combLogic0 (
+        .in(in),
+        .state(state),
+        .state_next(state_next)
+    );
+
+endmodule
+
+module combLogic (
+    input  in,
+    input  state,
+    output state_next
+);
+
+    assign state_next = in ^ state;
+
+endmodule
 ```
+
+The figure below shows the before and after of the triplication of ```fsm04```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The pink dotted lines indicates that the ```default_tmrt``` attribute has been set to false on the module declaration associated with the contents or the ```tmrt``` attribute has been set to false on an inferred register, whereas orange indicates it has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\fsm\fsm04_triplicating_the_register_and_clock_skew.drawio.svg">
@@ -353,6 +457,8 @@ endmodule
 ---
 
 ### Module Instantiations - Triplicating a Fixed Macrocell
+
+This example utilises the ```default_tmrt``` attribute set on the module declarations. This signals the implementation that all ports belonging to ```inst01``` and the module instantiation ```logic01``` should be triplicated.
 
 ```sv
 (*default_tmrt="false"*)
@@ -380,6 +486,8 @@ module inst01 (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```inst01```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents, and pink indicates false. The orange text indicates that the ```tmrt``` attribute has been set to true.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\module_instantiations\inst01_triplicating_fixed_macrocell.drawio.svg">
   <img alt="Triplication with voting" src="figures\light-mode\user_guide_examples\module_instantiations\inst01_triplicating_fixed_macrocell.drawio.svg">
@@ -388,6 +496,8 @@ endmodule
 ---
 
 ### Module Instantations - Non-triplicating a Fixed Macrocell
+
+This example utilises the ```default_tmrt``` attribute set on the module declarations. This signals the implementation that everything except the module instantiation ```logic01``` should be triplicated. This forces the creation of a majority voter and fanout.
 
 ```sv
 (*default_tmrt="false"*)
@@ -401,7 +511,7 @@ module mlogic(
 endmodule
 
 (*default_tmrt="true"*)
-module inst01 (
+module inst02 (
     input  in,
     output out
 );
@@ -415,6 +525,8 @@ module inst01 (
 endmodule
 ```
 
+The figure below shows the before and after of the triplication of ```inst02```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents, and pink indicates false. The orange text indicates that the ```tmrt``` attribute has been set to true, and pink indicates false.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\module_instantiations\inst02_non_triplicating_fixed_macrocell.drawio.svg">
   <img alt="Non-triplicating a fixed macrocell" src="figures\light-mode\user_guide_examples\module_instantiations\inst02_non_triplicating_fixed_macrocell.drawio.svg">
@@ -423,6 +535,8 @@ endmodule
 ---
 
 ### Module Instantations - Triplicating a User's Macrocell
+
+This example utilises the ```default_tmrt``` attribute set on the module declarations. This signals the implementation that everything except the module instantiation ```logic01``` should be triplicated. This forces the creation of a majority voter and fanout.
 
 ```sv
 (*default_tmrt="true"*)
@@ -449,6 +563,8 @@ module inst01 (
 
 endmodule
 ```
+
+The figure below shows the before and after of the triplication of ```inst02```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The orange dotted lines indicates that the ```default_tmrt``` attribute has been set to true on the module declaration associated with the contents. The orange text indicates that the ```tmrt``` attribute has been set to true, and pink indicates false.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\module_instantiations\inst03_triplicating_user_macrocell.drawio.svg">
