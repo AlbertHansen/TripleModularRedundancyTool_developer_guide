@@ -1,6 +1,6 @@
 # TripleModularRedundancyTool User Guide
 
-The purpose of this documentation is describe how an ASIC designer would approach the TripleModularRedundancyTool with triplication as the main goal. Below is a copy of the **Message to Developers** section in the [README](README.md), which should give a quick overview 
+The purpose of this documentation is describe how an ASIC designer would approach the TripleModularRedundancyTool with triplication as the main goal. Below is a copy of the **Message to Developers** section in the [README](README.md), which should give a quick overview of the design philosophy behind the implementation.
 
 ---
 
@@ -36,7 +36,7 @@ The **update step** applies the ```tmrt``` attribute set to true on all reachabl
   <img alt="Step 1: Update" src="figures/light-mode/3-steps_1.drawio.svg">
 </picture>
 
-Every element with the ```tmrt``` attribute set to true a fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
+Every element with the ```tmrt``` attribute set to true is fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_2.drawio.svg">
@@ -92,7 +92,7 @@ The figure below shows the before and after of the triplication of ```comb02```.
 
 ### Combinatorial Logic - Logic and Output Triplication
 
-This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **port**. This signals the implementation that all ports except *in* belonging to ```comb03``` should be triplicated. This will force the combinatorial logic between the ports to also be triplicated, and a **fanout** from *in*.
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **port**. This signals the implementation that all ports belonging to ```comb03``` except *in* should be triplicated. This will force the combinatorial logic between the ports to also be triplicated, and a **fanout** from *in*.
 
 ```sv
 (*default_tmrt="true"*)
@@ -120,7 +120,7 @@ The figure below shows the before and after of the triplication of ```comb03```.
 
 ### Combinatorial Logic - Input and Logic Triplication
 
-This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **port**. This signals the implementation that all ports except *out* belonging to ```comb04``` should be triplicated. This will force the combinatorial logic between the ports to also be triplicated, and the creation of a **majority voter** to *out*.
+This example utilises the ```default_tmrt``` attribute set on the module declaration and the ```tmrt``` attribute set on a **port**. This signals the implementation that all ports belonging to ```comb04``` except *out* should be triplicated. This will force the combinatorial logic between the ports to also be triplicated, and the creation of a **majority voter** to *out*.
 
 ```sv
 (*default_tmrt="true"*)
@@ -396,7 +396,7 @@ module combLogic (
 endmodule
 ```
 
-The figure below shows the before and after of the triplication of ```fsm03```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The pink dotted lines indicates that the ```default_tmrt``` attribute has been set to false on the module declaration associated with the contents or the ```tmrt``` attribute has been set to false on an inferred register, whereas orange indicates it has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false, and the orange text indicates it has been set to true.
+The figure below shows the before and after of the triplication of ```fsm03```. Red outline marks target, blue outline marks affected ports, cells, nets, etc. The pink dotted lines indicates that the ```default_tmrt``` attribute has been set to false on the module declaration associated with the contents or the ```tmrt``` attribute has been set to false on an inferred register, whereas orange indicates it has been set to true. The pink text indicates that the ```tmrt``` attribute has been set to false.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures\dark-mode\user_guide_examples\fsm\fsm03_triplicating_only_the_register.drawio.svg">

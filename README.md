@@ -44,7 +44,7 @@ The **update step** applies the ```tmrt``` attribute set to true on all reachabl
   <img alt="Step 1: Update" src="figures/light-mode/3-steps_1.drawio.svg">
 </picture>
 
-Every element with the ```tmrt``` attribute set to true a fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
+Every element with the ```tmrt``` attribute set to true is fetched and triplicated in the **triplicate step**. The replicants have their inputs driven by the same sources as the original cell, which can be seen below. Furthermore, this step implicitly handles all fanout situations, notice that port A has already been connected to all the correct pins.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/dark-mode/3-steps_2.drawio.svg">
