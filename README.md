@@ -155,7 +155,7 @@ Since this implementation was created over a relatively short period, some featu
 * Change naming scheme
   * To create three intermediate voters, nets are suffixed with "_Voted", however to gain continuity with the current TMRG the suffix should just be "Voted"
   * Replicants are suffixed with "_A", "_B", and "_C", but to gain contiunity with the current TMRG the suffixes should lose the underscore.
-* Include the missing functionalities (see [tmrt](https://tmrt.web.cern.ch/tmrt/))
+* Include the missing functionalities (see [TMRG](https://tmrg.web.cern.ch/tmrg/))
   * Slicing
   * Using the error signal
   * etc.
