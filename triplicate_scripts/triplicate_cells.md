@@ -22,8 +22,21 @@ proc triplicate_cells {} {
     # output: none
     ###################################################################
     
+    # empty list to hold all to-be-triplicated cells and registers
+    set cells_to_be_triplicated ""
+
     # fetch all cells with the tmrt attribute = true, avoiding hierarchical instances
-    set cells_to_be_triplicated [get_synopsys_value "get_cells -filter {tmrt==true && is_hierarchical==false}"]
+    set logic_cells [get_synopsys_value "get_cells -filter {is_hierarchical==false}"]
+    foreach cell $logic_cells {
+        set tmrt [get_tmrt $cell]
+        if {$tmrt == true} {
+            set cells_to_be_triplicated [join [list $cells_to_be_triplicated $cell]]
+        }
+    }
+
+
+    # set cells_to_be_triplicated [get_synopsys_value "get_cells -filter {tmrt==true && is_hierarchical==false}"]
+    # set cells_to_be_triplicated [get_synopsys_value "get_cells -filter {is_hierarchical==false}"]
 
     # fetch all registers with tmrt = true
     set registers [get_synopsys_value "all_registers -no_hierarchy"]
@@ -36,6 +49,7 @@ proc triplicate_cells {} {
     
     # triplicate cells
     foreach cell $cells_to_be_triplicated {
+        puts "--- $cell ---"
         triplicate_cell $cell
     }
 }
