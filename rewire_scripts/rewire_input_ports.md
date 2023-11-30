@@ -40,11 +40,17 @@ proc rewire_input_ports {} {
         set driven_ports [get_driven_ports $port_A]
         set driven [join [list $driven_pins $driven_ports]]
 
+
+        puts "THESE ARE DRIVEN: $driven"
+        puts "THESE ARE THE REPLICANT PORTS: $replicant_ports"
+
         while {[llength $driven] > 0} {
 
             # retrieve replicants (in the case no replicants are found the function returns the input!)
             set driven_replicants [get_replicants [lindex $driven 0]]
             set driven_replicants [lsort -increasing $driven_replicants]
+
+            puts "THESE ARE THE REPLICANTS OF [lindex $driven 0]: $driven_replicants"
 
             # if replicants are found, connect them to correspondingly
             if {[llength $driven_replicants] > 1} {

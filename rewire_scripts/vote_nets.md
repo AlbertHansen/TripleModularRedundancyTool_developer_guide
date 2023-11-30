@@ -24,9 +24,10 @@ proc vote_nets {} {
 
     # retrieve nets from design and filter as to only have suffix _Voted
     set nets [get_synopsys_value "get_nets -quiet"]
-    set nets [lsearch -all -inline -regexp $nets {\S+_Voted}]
+    set nets [lsearch -all -inline -regexp $nets {\S+_Voted\S*}]
 
     foreach net $nets {
+
         # separate driver- and driven pins/ports
         set net_connections [get_synopsys_value "all_connected [get_nets $net]"]
         set driver ""
@@ -60,6 +61,7 @@ proc vote_nets {} {
             set cell [regexp -all -inline {\S+_[ABC]} $cell]
             if {[llength $cell] > 0} {
                 set suffix [lindex [split $cell "_"] end]
+                set suffix [string trim $suffix "\{\}"]
                 if {$suffix == "A"} {
                     set driven_A [join [list $driven_A $connection]]
                 } elseif {$suffix == "B"} {
@@ -68,6 +70,17 @@ proc vote_nets {} {
                     set driven_C [join [list $driven_C $connection]]
                 }
 
+                set $driven [lremove $driven $connection]
+            } elseif {[llength [regexp -all -inline {\S+_[ABC]} $connection]] > 0} {
+                set suffix [lindex [split $connection "_"] end]
+                set suffix [string trim $suffix "\{\}"]
+                if {$suffix == "A"} {
+                    set driven_A [join [list $driven_A $connection]]
+                } elseif {$suffix == "B"} {
+                    set driven_B [join [list $driven_B $connection]]
+                } elseif {$suffix == "C"} {
+                    set driven_C [join [list $driven_C $connection]]
+                }
                 set $driven [lremove $driven $connection]
             }
         }

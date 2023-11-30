@@ -13,28 +13,30 @@ After all *update*, *triplicate*, and *rewire* routines have been executed, this
 ## Definition
 
 ```tcl
-proc replace_port { original replacement } {
-    ########################################################################################
-    # replaces a port with a replicant of the same direction (connecting to net)
-    # this function is used to rename ports, since seemingly this cannot be
-    # done otherwise
+proc remove_ports_top {} {
+    ############################################################
+    # Clean up of top layer disconnected ports, by removing
+    # original port, that has been triplicated and should be
+    # replaced with a port of an appropriate name
     #
-    # input:  two ports of the same direction
-    # output: nothing
-    ########################################################################################
-    
-    # check if ports have the same direction, if not abort
-    set direction_original    [get_synopsys_value "get_attribute $original pin_direction"]
-    set direction_replacement [get_synopsys_value "get_attribute $replacement pin_direction"]
-    if {![string equal $direction_original $direction_replacement]} {
-        puts "The direction of $original and $replacement are incongruent! "
-        return
-    }
+    # input:  none
+    # output: none
+    ############################################################
 
-    # disconnect original from net and connect replacement
-    set net [get_synopsys_value "all_connected [get_ports $original]"]
-    disconnect_net [get_nets $net] [get_ports $original]
-    connect_net    [get_nets $net] [get_ports $replacement]
+    # retrieve all ports
+    set ports_in  [get_synopsys_value "all_inputs"]
+    set ports_out [get_synopsys_value "all_outputs"]
+    set ports     [join [list $ports_in $ports_out]]
+
+    # remove all triplicated ports with correct suffixes from the list
+    set ports     [lsearch -all -inline -not -regexp $ports {[^ ]+_[ABC](?=\s|$)}]
+
+    # remove 'original' ports
+    foreach port $ports {
+        if {[get_tmrt $port] == true} {
+            remove_port $port
+        }
+    }
 }
 ```
 

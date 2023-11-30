@@ -28,7 +28,7 @@ proc rewire_duped_cells {} {
     # retrieve all cells with suffix _A (being one of a set of three replicants)
     set duped_cells [get_synopsys_value "get_cells -filter is_hierarchical==false -quiet *_A"]
 
-    # fetch all registers
+    # fetch all registers with tmrt = true
     set registers [get_synopsys_value "all_registers -no_hierarchy"]
     set registers [lsearch -all -inline -regexp $registers "\\S+_A"]
 
@@ -39,6 +39,7 @@ proc rewire_duped_cells {} {
     set duped_cells [join [list $duped_cells $registers $instances]]
     set duped_cells [lsort -unique $duped_cells]
     foreach cell_A $duped_cells {
+        puts "/// $cell_A ///"
 
         # retrieve all output pins
         set cell_A_outputs [get_synopsys_value "get_pins -of_object $cell_A -filter pin_direction==out"]
@@ -46,6 +47,7 @@ proc rewire_duped_cells {} {
         
         # loop through all output pins on cell 
         foreach cell_A_output $cell_A_outputs {
+            puts "--- $cell_A_output ---"
 
             # fetch corresponding pin on replicants
             set replicant_pins [get_replicants $cell_A_output]
@@ -56,11 +58,24 @@ proc rewire_duped_cells {} {
             set driven_ports [get_driven_ports $cell_A_output]
             set driven [join [list $driven_pins $driven_ports]]
 
+            # flag to check if a voter has been created
+            set voter_created 0
+            set voter_out ""
+
+            puts "Loop over the driven: $driven"
             while {[llength $driven] > 0} {
+                puts "-- [lindex $driven 0]"
 
                 # retrieve replicants (in the case no replicants are found the function returns the input!)
                 set driven_replicants [get_replicants [lindex $driven 0]]
                 set driven_replicants [lsort -increasing $driven_replicants]
+                puts "replicants: $driven_replicants"
+
+                # if the driven element does not exist, remove it from the list
+                #if {[llength $driven_replicants] < 1} {
+                #    set driven [lremove $driven [lindex $driven 0]]
+                #    continue
+                #}
 
                 # if replicants are found, connect them to correspondingly
                 if {[llength $driven_replicants] > 1 && [llength $driven_replicants] >= [llength $replicant_pins]} {
@@ -81,7 +96,25 @@ proc rewire_duped_cells {} {
                     continue
                 }
 
-                create_voter $replicant_pins $driven_replicants
+                # create unique voter if the driven pin/port is triplicated 
+                if {[llength $driven_replicants] > 1} {
+                    create_voter $replicant_pins $driven_replicants
+                    set driven [lremove $driven $driven_replicants]
+                    continue
+                }
+
+                # If a voter is already created, connect all non-triplicated driven pins/ports to its output
+                if {$voter_created} {
+                    if {[is_port $driven_replicants] == true} {
+                        connect $voter_out [get_ports $driven_replicants]
+                    } else {
+                        connect $voter_out [get_pins  $driven_replicants]
+                    }
+                } else {
+                    create_voter $replicant_pins $driven_replicants
+                    set voter_created 1
+                    set voter_out [get_driver_connection $driven_replicants]
+                }
                 set driven [lremove $driven $driven_replicants]
             }
         }

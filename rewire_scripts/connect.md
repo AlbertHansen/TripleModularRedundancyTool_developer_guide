@@ -28,6 +28,7 @@ proc connect {driver_pin driven_pins} {
     # input:  A pin/port to drive. A list of pins/ports to be driven
     # output: nothing 
     ########################################################################################
+    # puts "Connect has been called with the following input\n\t$driver_pin\n\t$driven_pins"
     
     set driver_pin_net ""
     set driven_pin_net ""
@@ -37,7 +38,7 @@ proc connect {driver_pin driven_pins} {
     if {[is_port $driver_pin]} {
         set driver_pin_net [get_synopsys_value "all_connected [get_ports -quiet $driver_pin]"]
     } else {
-        set driver_pin_net [get_synopsys_value "all_connected [get_pins -quiet $driver_pin]"]
+        set driver_pin_net [get_synopsys_value "all_connected [get_pins  -quiet $driver_pin]"]
     }
     set net $driver_pin_net
 
@@ -46,7 +47,7 @@ proc connect {driver_pin driven_pins} {
         if {[is_port $pin]} {
             set driven_pin_net [get_synopsys_value "all_connected [get_ports -quiet $pin]"]
         } else {
-            set driven_pin_net [get_synopsys_value "all_connected [get_pins -quiet $pin]"]
+            set driven_pin_net [get_synopsys_value "all_connected [get_pins  -quiet $pin]"]
         }
 
         set driven_pin_net [regexp -all -inline {\S+_Voted\S*} $driven_pin_net]
@@ -73,7 +74,7 @@ proc connect {driver_pin driven_pins} {
         }
         connect_net [get_nets $net] [get_ports $driver_pin]
     } else {
-        set old_net [get_synopsys_value "all_connected [get_pins -quiet $driver_pin]"]
+        set old_net [get_synopsys_value "all_connected [get_pins  -quiet $driver_pin]"]
         if {[string length $old_net] > 0} {
             disconnect_net [get_nets $old_net] [get_pins $driver_pin]
         }
@@ -89,7 +90,7 @@ proc connect {driver_pin driven_pins} {
             }
             connect_net    [get_nets $net]     [get_ports $pin]
         } else {
-            set old_net [get_synopsys_value "all_connected [get_pins -quiet $pin]"]
+            set old_net [get_synopsys_value "all_connected [get_pins  -quiet $pin]"]
             if {[string length $old_net] > 0} {
                 disconnect_net [get_nets $old_net] [get_pins $pin]
             }
