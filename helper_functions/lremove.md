@@ -30,7 +30,6 @@ proc lremove { a_list elements_to_be_removed } {
 
     return $a_list
 }
-
 ```
 
 ## Example

@@ -25,6 +25,7 @@ proc get_replicants { element } {
 
     # cells (without pins)
     if {[is_cell $element]} {
+        
         set tmrt [get_tmrt $element]
         if {$tmrt != "true"} {
             return $element
@@ -45,7 +46,6 @@ proc get_replicants { element } {
         set regex [join [list $base "\\\[ABC\\\]" ] "_"]
 
         # find the replicants based on the regexp
-        puts "THIS IS THE REGEXP: $regex"
         set replicants [get_synopsys_value "get_cells -quiet -regexp $regex"]
 
         return [lsort -increasing $replicants]
@@ -73,7 +73,6 @@ proc get_replicants { element } {
         set regex [join [list $base "\\\[ABC\\\]" ] "_"]
 
         # find the replicants based on the regexp
-        puts "THIS IS THE REGEXP: $regex"
         set replicants [get_synopsys_value "get_ports -quiet -regexp $regex"]
 
         return [lsort -increasing $replicants]
@@ -84,6 +83,12 @@ proc get_replicants { element } {
     set pin       [lindex [split $element "/"] end]
     set cell_tmrt [get_tmrt $cell]
     set pin_tmrt  [get_tmrt $element]
+
+    # remove [] from regexp
+    for {set i 0} {$i < 2} {incr i} {
+        set pin [string replace $pin [string first "\[" $pin] [string first "\[" $pin] ".{1}"]
+        set pin [string replace $pin [string first "\]" $pin] [string first "\]" $pin] ".{1}"]
+    }
 
     # create regexp 
     set regex ""
@@ -134,7 +139,6 @@ proc get_replicants { element } {
     }
 
     # find the replicants based on the regexp
-    puts "THIS IS THE REGEXP, vi er her, right: $regex"
     set replicants [get_synopsys_value "get_pins -quiet -regexp $regex"]
 
     return [lsort -increasing $replicants]

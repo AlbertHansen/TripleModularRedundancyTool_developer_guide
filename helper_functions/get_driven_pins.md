@@ -15,7 +15,7 @@ This function is used mainly for the *rewire* routines, as the driven elements o
 ```tcl
 proc get_driven_pins { element } {
     ##################################################################################
-    # looks forward from pin and returns all connections, that 
+    # looks forward from element and returns all connections, that 
     #       - are driven
     #       - are pins
     #

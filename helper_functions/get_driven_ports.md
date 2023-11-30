@@ -58,6 +58,7 @@ proc get_driven_ports { element } {
             return ""
         }
         set connections [get_synopsys_value "all_connected [get_nets $net]"]
+
     }
 
     # remove element from list of connections
